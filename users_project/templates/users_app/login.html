@@ -1,0 +1,25 @@
+{% extends 'users_app/base.html' %}
+
+{% block body %}
+
+<h1>Please Login</h1>
+
+{% if error_message %}
+<p><em>{{ error_message }}</em></p>
+{% endif %}
+
+<form action="{% url 'users_app:user_login' %}" method="post">
+
+    {% csrf_token %}
+
+    <label for="username">Username:</label>
+    <input type="text" name="username" placeholder="Enter Username">
+
+    <label for="password">Password:</label>
+    <input type="password" name="password">
+    
+    <input type="submit" value="Login">
+
+</form>
+
+{% endblock %}

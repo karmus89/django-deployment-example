@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Base Page</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+            crossorigin="anonymous">
+    </head>
+
+    <body>
+
+        <nav class="navbar navbar-expand-md navbar-light bg-light ">
+
+            <div class="container">
+
+                <ul class="navbar-nav mr-auto">
+
+                    <li class="nav-item active">
+                        <a class="navbar-brand" href="{% url 'index' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'users_app:register' %}">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
+                    </li>
+
+                {% if user.is_authenticated %}
+                
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'users_app:user_logged_in' %}">Prohibited content</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'users_app:user_logout' %}">Logout</a>
+                    </li>
+                </ul>
+                <span class="navbar-text">
+                    <em>Logged in as: </em>
+                    <strong>{{ user.username }}</strong>
+                </span>
+
+                {% else %}
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'users_app:user_login' %}">Login</a>
+                </li>
+                </ul>
+
+                {% endif %}
+
+
+            </div>
+
+        </nav>
+
+        <div class="container">
+
+            <div class="jumbotron">
+
+                {% block body %} {% endblock %}
+
+            </div>
+
+        </div>
+
+    </body>
+
+</html>
